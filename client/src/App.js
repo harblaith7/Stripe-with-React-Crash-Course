@@ -1,13 +1,16 @@
 import React, {useState} from 'react';
 import './App.css';
 import ProductCard from "./components/ProductCard/ProductCard"
-import CheckForm from "./components/CheckoutForm/CheckoutForm"
+import CheckoutForm from "./components/CheckoutForm/CheckoutForm"
 import {Elements} from "@stripe/react-stripe-js"
 import {loadStripe} from "@stripe/stripe-js"
 import keys from "./config/dev"
 
-// Creating our stripe object
 const stripePromise = loadStripe(keys.publishableKey)
+
+stripePromise.then(data => {
+  console.log(data)
+})
 
 function App() {
 
@@ -34,7 +37,7 @@ function App() {
     price: 70
   })
 
-  const displayCards = () => {
+  const displayProducts = () => {
     return products.map(product => {
       return (
         <ProductCard
@@ -46,15 +49,14 @@ function App() {
   }
 
   return (
-    // Wrapping our whole app with the Elements component
-    // so that all components have access to the stripe object 
-    // and the stripe components
-    <Elements stripe={stripePromise}>
+    <Elements
+      stripe={stripePromise}
+    >
       <div className="App">
         <div className="product-cards">
-          {displayCards()}
+          {displayProducts()}
         </div>
-        <CheckForm
+        <CheckoutForm
           product={product}
         />
       </div>
