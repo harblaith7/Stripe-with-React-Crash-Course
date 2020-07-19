@@ -1,13 +1,34 @@
-import React from 'react'
+import React, {useState} from 'react'
 import "./CheckoutForm.css"
+import {CardElement} from "@stripe/react-stripe-js"
 
 export default function CheckoutForm(props) {
+
+    const [isProcessing, setIsProcessing] = useState(false)
+
+    const handlePayment = (e) => {
+
+        e.preventDefault()
+
+        setIsProcessing(true)
+
+        const billingInfo = {
+            name: e.target.name.value,
+            phone: e.target.phone.value,
+            email: e.target.email.value,
+            address: {
+                line1: e.target.address.value
+            }
+        }
+
+    }
+
     return (
         <div className="CheckoutForm">
             <h3 className="purchase-msg">
                 You are purchasing an <span>{props.product.name}</span> for ${props.product.price}
             </h3>
-            <form className="form">
+            <form className="form" onSubmit={handlePayment}>
                 <input 
                     type="text" 
                     placeholder="Full name"
@@ -32,8 +53,18 @@ export default function CheckoutForm(props) {
                     name="address"
                     required
                 />
-                <button type="submit">
-                    Pay
+                <CardElement
+                    options={{
+                        hidePostalCode: true,
+                        style: {
+                            base: {
+                                fontSize: '20px'
+                            }
+                        }
+                    }} 
+                />
+                <button type="submit" disabled={isProcessing}>
+                    {!isProcessing ? "Pay" : "Processing..."}
                 </button>
             </form>
         </div>

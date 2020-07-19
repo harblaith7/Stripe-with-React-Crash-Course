@@ -2,6 +2,15 @@ import React, {useState} from 'react';
 import './App.css';
 import ProductCard from "./components/ProductCard/ProductCard"
 import CheckoutForm from "./components/CheckoutForm/CheckoutForm"
+import {Elements} from "@stripe/react-stripe-js"
+import {loadStripe} from "@stripe/stripe-js"
+import keys from "./config/dev"
+
+const stripePromise = loadStripe(keys.publishableKey)
+
+stripePromise.then(data => {
+  console.log(data)
+})
 
 function App() {
 
@@ -42,14 +51,18 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <div className="product-cards">
-        {displayProducts()}
+    <Elements
+      stripe={stripePromise}
+    >
+      <div className="App">
+        <div className="product-cards">
+          {displayProducts()}
+        </div>
+        <CheckoutForm
+          product={product}
+        />
       </div>
-      <CheckoutForm
-        product={product}
-      />
-    </div>
+    </Elements>
   );
 }
 
