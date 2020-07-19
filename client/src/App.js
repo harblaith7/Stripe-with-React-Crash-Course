@@ -16,9 +16,9 @@ function App() {
 
   const [products, setProducts] = useState([
     {
-      img: "https://i.dlpng.com/static/png/6378027_preview.png",
-      name: "Organic Apple",
-      price: 70
+    img: "https://i.dlpng.com/static/png/6378027_preview.png",
+    name: "Organic Apple",
+    price: 70
     },
     {
       img: "https://pngriver.com/wp-content/uploads/2018/04/Download-Orange-Transparent.png",
@@ -37,13 +37,11 @@ function App() {
     price: 70
   })
 
-  const displayProducts = () => {
+  const displayCards = () => {
     return products.map(product => {
       return (
         <ProductCard
-          img={product.img}
-          name={product.name}
-          price={product.price}
+          product={product}
           setProduct={setProduct}
         />
       )

@@ -46,20 +46,20 @@ export default function CheckoutForm(props) {
                     name="name"
                     required
                 />
-                <input 
-                    type="text" 
-                    placeholder="Phone Number"
+                <input
+                    type="text"
+                    placeholder="Phone number"
                     name="phone"
                     required
                 />
-                <input 
-                    type="email" 
+                <input
+                    type="email"
                     placeholder="Email"
                     name="email"
                     required
                 />
-                <input 
-                    type="text" 
+                <input
+                    type="text"
                     placeholder="Address"
                     name="address"
                     required
@@ -81,3 +81,6 @@ export default function CheckoutForm(props) {
         </div>
     )
 }
+
+
+export default CheckoutForm
