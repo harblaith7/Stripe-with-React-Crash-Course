@@ -16,6 +16,10 @@
     font-size: 2rem;
 }
 
+.purchase-msg span {
+    color: rgb(6, 47, 47)
+}
+
 input, button {
     font-size: 1.5rem;
     padding: 0.5rem 1rem;

@@ -13,7 +13,7 @@ function App() {
     },
     {
       img: "https://pngriver.com/wp-content/uploads/2018/04/Download-Orange-Transparent.png",
-      name: "Organic Organic",
+      name: "Organic Orange",
       price: 90
     },
     {
@@ -23,6 +23,11 @@ function App() {
     }
   ])
 
+  const [product, setProduct] = useState({
+    name: "Organic Apple",
+    price: 70
+  })
+
   const displayProducts = () => {
     return products.map(product => {
       return (
@@ -30,6 +35,7 @@ function App() {
           img={product.img}
           name={product.name}
           price={product.price}
+          setProduct={setProduct}
         />
       )
     })
@@ -40,7 +46,9 @@ function App() {
       <div className="product-cards">
         {displayProducts()}
       </div>
-      <CheckoutForm/>
+      <CheckoutForm
+        product={product}
+      />
     </div>
   );
 }

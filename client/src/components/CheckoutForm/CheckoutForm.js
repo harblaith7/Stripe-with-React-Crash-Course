@@ -1,10 +1,12 @@
 import React from 'react'
 import "./CheckoutForm.css"
 
-export default function CheckoutForm() {
+export default function CheckoutForm(props) {
     return (
         <div className="CheckoutForm">
-            <h3 className="purchase-msg">You are purchasing an for $</h3>
+            <h3 className="purchase-msg">
+                You are purchasing an <span>{props.product.name}</span> for ${props.product.price}
+            </h3>
             <form className="form">
                 <input 
                     type="text" 
