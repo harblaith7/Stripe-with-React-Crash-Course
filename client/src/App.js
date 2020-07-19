@@ -16,7 +16,7 @@ function App() {
 
   const [products, setProducts] = useState([
     {
-    img: "https://i.dlpng.com/static/png/6378027_preview.png",
+    img: "https://lh3.googleusercontent.com/proxy/SbMzCF3JlUGMgenRhdK3dN-j2kT-Wlu-_sV_S3_HrlKRDZ7omxd3janRNIAESksm6TzFnYbxS1QUHuFjUAxcrSArGu430CJAwZeCrSL5Z6iCyNoV7VEnmxjJGUETzrVTvEY02EXPpUkm3RFy2VTWksMUvrMwpyJQLY0ZALdYxcT5rThV_Do",
     name: "Organic Apple",
     price: 70
     },
