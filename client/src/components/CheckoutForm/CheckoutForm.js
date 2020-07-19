@@ -1,5 +1,6 @@
 import React from 'react'
 import "./CheckoutForm.css"
+// This is the CardElement Component
 import {CardElement} from "@stripe/react-stripe-js"
 
 function CheckoutForm(props) {
@@ -33,6 +34,7 @@ function CheckoutForm(props) {
                     name="address"
                     required
                 />
+                {/* You can add options as props */}
                 <CardElement
                     options={{
                         hidePostalCode: true,

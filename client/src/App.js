@@ -6,6 +6,7 @@ import {Elements} from "@stripe/react-stripe-js"
 import {loadStripe} from "@stripe/stripe-js"
 import keys from "./config/dev"
 
+// Creating our stripe object
 const stripePromise = loadStripe(keys.publishableKey)
 
 function App() {
@@ -45,6 +46,9 @@ function App() {
   }
 
   return (
+    // Wrapping our whole app with the Elements component
+    // so that all components have access to the stripe object 
+    // and the stripe components
     <Elements stripe={stripePromise}>
       <div className="App">
         <div className="product-cards">
