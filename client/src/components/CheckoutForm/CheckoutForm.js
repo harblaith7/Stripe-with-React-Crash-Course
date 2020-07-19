@@ -3,7 +3,7 @@ import "./CheckoutForm.css"
 import {CardElement} from "@stripe/react-stripe-js"
 import axios from 'axios'
 
-export default function CheckoutForm(props) {
+function CheckoutForm(props) {
 
     const [isProcessing, setIsProcessing] = useState(false)
 

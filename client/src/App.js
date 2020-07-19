@@ -37,7 +37,7 @@ function App() {
     price: 70
   })
 
-  const displayCards = () => {
+  const displayProducts = () => {
     return products.map(product => {
       return (
         <ProductCard
