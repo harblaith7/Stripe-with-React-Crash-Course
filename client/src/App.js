@@ -1,24 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import ProductCard from "./components/ProductCard/ProductCard"
 
 function App() {
+
+  const [products, setProducts] = useState([
+    {
+      img: "https://i.dlpng.com/static/png/6378027_preview.png",
+      name: "Organic Apple",
+      price: 70
+    },
+    {
+      img: "https://pngriver.com/wp-content/uploads/2018/04/Download-Orange-Transparent.png",
+      name: "Organic Organic",
+      price: 90
+    },
+    {
+      img: "https://lh3.googleusercontent.com/proxy/HxUZdB-OpmpT9T6o0ptrdHTu3x1A2rLf2PrZkeUEj1Yl1K191nBjTGP11esB02H20RfcxlpDcBTnVlciKw_W-eVje0OApjB6LOaKdg",
+      name: "Organic Banana",
+      price: 17
+    }
+  ])
+
+  const displayProducts = () => {
+    return products.map(product => {
+      return (
+        <ProductCard
+          img={product.img}
+          name={product.name}
+          price={product.price}
+        />
+      )
+    })
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="product-cards">
+        {displayProducts()}
+      </div>
     </div>
   );
 }
