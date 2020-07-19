@@ -1,15 +1,21 @@
 import React, {useState} from 'react';
 import './App.css';
 import ProductCard from "./components/ProductCard/ProductCard"
-import CheckoutForm from "./components/CheckoutForm/CheckoutForm"
+import CheckForm from "./components/CheckoutForm/CheckoutForm"
+import {Elements} from "@stripe/react-stripe-js"
+import {loadStripe} from "@stripe/stripe-js"
+import keys from "./config/dev"
+
+// Creating our stripe object
+const stripePromise = loadStripe(keys.publishableKey)
 
 function App() {
 
   const [products, setProducts] = useState([
     {
-      img: "https://i.dlpng.com/static/png/6378027_preview.png",
-      name: "Organic Apple",
-      price: 70
+    img: "https://i.dlpng.com/static/png/6378027_preview.png",
+    name: "Organic Apple",
+    price: 70
     },
     {
       img: "https://pngriver.com/wp-content/uploads/2018/04/Download-Orange-Transparent.png",
@@ -28,13 +34,11 @@ function App() {
     price: 70
   })
 
-  const displayProducts = () => {
+  const displayCards = () => {
     return products.map(product => {
       return (
         <ProductCard
-          img={product.img}
-          name={product.name}
-          price={product.price}
+          product={product}
           setProduct={setProduct}
         />
       )
@@ -42,14 +46,19 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <div className="product-cards">
-        {displayProducts()}
+    // Wrapping our whole app with the Elements component
+    // so that all components have access to the stripe object 
+    // and the stripe components
+    <Elements stripe={stripePromise}>
+      <div className="App">
+        <div className="product-cards">
+          {displayCards()}
+        </div>
+        <CheckForm
+          product={product}
+        />
       </div>
-      <CheckoutForm
-        product={product}
-      />
-    </div>
+    </Elements>
   );
 }
 

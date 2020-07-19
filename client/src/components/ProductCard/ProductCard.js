@@ -1,20 +1,23 @@
 import React from 'react'
 import "./ProductCard.css"
 
-export default function ProductCard(props) {
+function ProductCard(props) {
 
     const setProduct = () => {
         props.setProduct({
-            name: props.name,
-            price: props.price
+            name: props.product.name,
+            price: props.product.price
         })
     }
 
     return (
         <div className="ProductCard" onClick={setProduct}>
-            <img src={props.img} className="card-image"/>
-            <h3 className="card-name">{props.name}</h3>
-            <p className="card-price">${props.price}</p>
+            <img src={props.product.img} className="card-image"/>
+            <h3 className="card-name">{props.product.name}</h3>
+            <p className="card-price">${props.product.price}</p>
         </div>
     )
 }
+
+
+export default ProductCard

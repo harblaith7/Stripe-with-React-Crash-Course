@@ -1,9 +1,10 @@
+  
 .App {
-    width: 75%;
-    margin: 10rem auto
+  width: 75%;
+  margin: 10rem auto
 }
 
 .product-cards {
-    display: flex;
-    justify-content: space-evenly;
+  display: flex;
+  justify-content: space-evenly;
 }
