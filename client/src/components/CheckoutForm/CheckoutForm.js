@@ -33,7 +33,18 @@ function CheckoutForm(props) {
                     name="address"
                     required
                 />
-                <CardElement/>
+                <CardElement
+                    options={{
+                        hidePostalCode: true,
+                        style: {
+                            base: {
+                                fontSize: '20px'
+                            }
+                        }
+                        
+                    }}
+                    
+                />
                 <button type="submit">
                     Pay
                 </button>
