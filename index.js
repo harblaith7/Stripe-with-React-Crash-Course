@@ -1,13 +1,15 @@
 const express = require('express')
 const Stripe = require('stripe')
-const keys = require('../config/dev')
-const dev = require('../config/dev')
+const keys = require('./config/dev')
+const cors = require('cors')
+
 
 const app = express()
 
 app.use(express.json())
+app.use(cors())
 
-const stripe = new Stripe(dev.stripeSecret)
+const stripe = new Stripe(keys.stripeSecret)
 
 app.post('/payment', async (req, res) => {
    
@@ -27,8 +29,6 @@ app.post('/payment', async (req, res) => {
 
 })
 
-
-module.exports = router
 
 app.listen(5000, () => {
     console.log("Now listening on PORT 5000")

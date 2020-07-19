@@ -1,12 +1,13 @@
 import React, {useState} from 'react'
 import "./CheckoutForm.css"
 import {CardElement} from "@stripe/react-stripe-js"
+import axios from 'axios'
 
 export default function CheckoutForm(props) {
 
     const [isProcessing, setIsProcessing] = useState(false)
 
-    const handlePayment = (e) => {
+    const handlePayment = async (e) => {
 
         e.preventDefault()
 
@@ -19,6 +20,16 @@ export default function CheckoutForm(props) {
             address: {
                 line1: e.target.address.value
             }
+        }
+
+        try {
+            const paymentIntent = await axios.post("http://localhost:5000/payment", {
+                amount: props.product.price * 100
+            })
+
+            console.log(paymentIntent.data)
+        } catch (error) {
+            console.log("error", error)
         }
 
     }
