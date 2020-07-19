@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
 import ProductCard from "./components/ProductCard/ProductCard"
+import CheckoutForm from "./components/CheckoutForm/CheckoutForm"
 
 function App() {
 
@@ -39,6 +40,7 @@ function App() {
       <div className="product-cards">
         {displayProducts()}
       </div>
+      <CheckoutForm/>
     </div>
   );
 }
