@@ -6,15 +6,25 @@ import axios from 'axios'
 function CheckoutForm(props) {
 
     const [isProcessing, setIsProcessing] = useState(false)
+    const [checkoutErrorMsg, setCheckoutErrorMsg] = useState("")
+    const [buttonMsg, setButtonMsg] = useState("Pay")
 
     const stripe = useStripe()
     const element = useElements()
+
+    const handleChange = (e) => {
+        if(e.error){
+            return setCheckoutErrorMsg(e.error.message)
+        }
+        setCheckoutErrorMsg("")
+    }
 
     const handlePayment = async (e) => {
 
         e.preventDefault()
 
         setIsProcessing(true)
+        setButtonMsg("Processing...")
 
         const cardElement = element.getElement('card')
 
@@ -40,14 +50,35 @@ function CheckoutForm(props) {
                 billing_details: billingInfo
             })
 
+            if(paymentMethodObj.error){
+                setCheckoutErrorMsg(paymentMethodObj.error.message)
+                setIsProcessing(false)
+                setButtonMsg("Pay")
+                return
+            }
             
             // Confirm Payment Method
             const confirmPayment = await stripe.confirmCardPayment(paymentIntent.data, {
                 payment_method: paymentMethodObj.paymentMethod.id
             })
+
+            if(confirmPayment.error){
+                setCheckoutErrorMsg(confirmPayment.error.message)
+                setIsProcessing(false)
+                setButtonMsg("Pay")
+                return
+            }
+
+            setButtonMsg("Success! Payment is Complete")
+
+            setTimeout(() => {
+                setButtonMsg("Pay")
+                setIsProcessing(false)
+            }, 2000)
             
         } catch (error) {
-            console.log("error", error)
+            setCheckoutErrorMsg(error.message)
+            setIsProcessing(false)
         }
 
     }
@@ -82,6 +113,9 @@ function CheckoutForm(props) {
                     name="address"
                     required
                 />
+                <p>
+                    {checkoutErrorMsg}
+                </p>
                 <CardElement
                     options={{
                         hidePostalCode: true,
@@ -90,10 +124,11 @@ function CheckoutForm(props) {
                                 fontSize: '20px'
                             }
                         }
-                    }} 
+                    }}
+                    onChange={handleChange}
                 />
                 <button type="submit" disabled={isProcessing}>
-                    {!isProcessing ? "Pay" : "Processing..."}
+                    {buttonMsg}
                 </button>
             </form>
         </div>
